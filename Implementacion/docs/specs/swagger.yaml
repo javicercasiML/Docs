@@ -1,0 +1,170 @@
+basePath: /
+definitions:
+  client.Client:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  web.Error:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact:
+    name: Quality Tooling Team
+  description: This is a template Go application for MeLi Bootcamps.
+  title: demo-bootcamp-go-documentation
+  version: "1.0"
+paths:
+  /clients:
+    get:
+      description: Get all clients
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/client.Client'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.Error'
+      summary: Show all clients
+      tags:
+      - clients
+    post:
+      consumes:
+      - application/json
+      description: Receives client information and creates a new one
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.Error'
+      summary: Creates a client
+      tags:
+      - clients
+  /clients/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get client by ID
+      parameters:
+      - description: Client ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/client.Client'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.Error'
+      summary: Show a client
+      tags:
+      - clients
+    put:
+      consumes:
+      - application/json
+      description: Receives a client id and update the client
+      parameters:
+      - description: Client ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.Error'
+      summary: Updates a client
+      tags:
+      - clients
+  /clients/name/{name}:
+    get:
+      consumes:
+      - application/json
+      description: Get client by name
+      parameters:
+      - description: Client Name
+        in: path
+        name: name
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/client.Client'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.Error'
+      summary: Show a client
+      tags:
+      - clients
+swagger: "2.0"
